@@ -42,36 +42,19 @@ class Solution:
         if root == None:
             return True
 
-        leftq  = [root]
-        rightq = [root]
-
-        while leftq or rightq:
-            if leftq == None and rightq == None:
-                return True
-            elif leftq and rightq:
-                leftnode = leftq.pop(0)
-                rightnode = rightq.pop(0)
-
-                if leftnode == None and rightnode == None:
-                    continue
-                elif leftnode and rightnode:
-                    pass
-                else:
-                    #print(2222)
-                    return False
-
-                if leftnode.val != rightnode.val:
-                    #print(3333)
-                    return False
-                
-                leftq.append(leftnode.left)
-                leftq.append(leftnode.right)
-                rightq.append(rightnode.right)
-                rightq.append(rightnode.left)
-            else:
-                return False
-            
-        return True
+        q = [[root,0]]
+        result = 0
+        while q:
+            index = q.pop(0)
+            if index[0] == None:
+                continue
+            if index[0].left == None and index[0].right == None:
+                result = max(result,index[1]+1)
+            if index[0].left:
+                q.append([index[0].left,index[1]+1])
+            if index[0].right:
+                q.append([index[0].right,index[1]+1])
+        return result
 
 if __name__ == "__main__":
     app = Solution()
