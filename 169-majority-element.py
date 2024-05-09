@@ -17,11 +17,12 @@ class Solution:
         dd = defaultdict(int)
         for each in nums:
             dd[each] += 1
+            print(dd.get)
 
         return max(dd, key=dd.get)
 
 if __name__ == "__main__":
     app = Solution()
-    a = [1,1,2,3,3]
+    a = [2,2,1,1,1,2,2]
     a = 701
     print(app.leetcode(a))
