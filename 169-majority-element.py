@@ -1,45 +1,5 @@
 '''
 
-Code
-Testcase
-Test Result
-Test Result
-168. Excel Sheet Column Title
-Solved
-Easy
-Topics
-Companies
-Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
-
-For example:
-
-A -> 1
-B -> 2
-C -> 3
-...
-Z -> 26
-AA -> 27
-AB -> 28 
-...
- 
-
-Example 1:
-
-Input: columnNumber = 1
-Output: "A"
-Example 2:
-
-Input: columnNumber = 28
-Output: "AB"
-Example 3:
-
-Input: columnNumber = 701
-Output: "ZY"
- 
-
-Constraints:
-
-1 <= columnNumber <= 231 - 1
 '''
 
 import string
@@ -53,34 +13,12 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, columnNumber: int) -> str:
-        result = ""
-        level = 26
-        capital_letters = list(string.ascii_uppercase)
+    def leetcode(self, nums: List[int]) -> int:
+        dd = defaultdict(int)
+        for each in nums:
+            dd[each] += 1
 
-        while level < columnNumber:
-            columnNumber -= level
-            level *= 26
-
-        while level > 26:
-            level //= 26
-            n = columnNumber // level
-            columnNumber %= level
-            if n == 0 and columnNumber == 0:
-                result += 'Z'
-            elif columnNumber == 0:
-                result += capital_letters[n-1]
-            elif n == 0:
-                result += 'A'
-            else:
-                result += capital_letters[n]
-
-        if columnNumber == 0:
-            result += 'Z'
-        else:
-            result += capital_letters[columnNumber-1]
-
-        return result
+        return max(dd, key=dd.get)
 
 if __name__ == "__main__":
     app = Solution()
