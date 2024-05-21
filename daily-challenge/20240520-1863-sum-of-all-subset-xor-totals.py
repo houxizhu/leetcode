@@ -64,6 +64,21 @@ class ListNode:
 
 class Solution:
     def leetcode(self, nums: List[int]) -> int:
+        total_xor_sum = 0
+        ll = len(nums)
+
+        ### The total number of subsets of an array of length n is 2^n
+        ### We use the bitwise representation of numbers from 0 to 2^n - 1 to represent each subset
+        for ii in range(1 << ll):
+            subset_xor = 0
+
+            ### Each bit in the number i represents whether the corresponding element in nums is included in the subset or not.
+            for jj in range(ll):
+                if ii & (1 << jj):
+                    subset_xor ^= nums[jj]
+            total_xor_sum += subset_xor
+        return total_xor_sum
+
         result = [[]]
         for each in nums:
             ll = len(result)
