@@ -49,12 +49,19 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, s: str) -> int:
-        ll = len(s)
-        result = 0
-        for ii in range(ll-1):
-            result += abs(ord(s[ii])-ord(s[ii+1]))
-        return result
+    def leetcode(self, n: int) -> int:
+        good = -1
+        bad = n
+        while bad > good:
+            if bad == good+1:
+                return bad
+            current = good+(bad-good)//2
+            if isBadVersion(current):
+                bad = current
+            else:
+                good = current
+
+        return bad
 
 if __name__ == "__main__":
     app = Solution()
