@@ -44,6 +44,7 @@ class Solution:
         """
         ll = len(s)
         for ii in range(ll//2):
+            c = s[ii]
             s[ii],s[ll-1-ii] = s[ll-1-ii],s[ii]
 
 if __name__ == "__main__":
