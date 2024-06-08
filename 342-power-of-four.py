@@ -26,7 +26,7 @@ Output: true
 
 Constraints:
 
--231 <= n <= 231 - 1
+-2^31 <= n <= 2^31 - 1
 
 
 Follow up: Could you solve it without loops/recursion?
@@ -45,9 +45,13 @@ class ListNode:
 
 class Solution:
     def leetcode(self, n: int) -> bool:
-        if n in [1, 4, 16, 64, 256, 1024, 4096, 16384, 16384, 65536, 65536, 262144, 262144, 1048576, 1048576, 4194304,
-                 4194304, 16777216, 16777216, 67108864, 67108864, 268435456, 268435456, 1073741824, 1073741824,
-                 4294967296, 4294967296]
+        for ii in range(16):
+            if n == 1 << (2 * ii):
+                return True
+        return False
+
+        if n in [1, 4, 16, 64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304, 16777216, 67108864, 268435456,
+                 1073741824, 4294967296]:
             return True
         return False
 
