@@ -79,7 +79,6 @@ class Solution:
 
         return False
 
-        ## time exceeded
         ll = len(nums)
         for ii in range(ll-1):
             total = nums[ii]
@@ -92,6 +91,6 @@ class Solution:
 
 if __name__ == "__main__":
     app = Solution()
-    a = [23,6,9]
-    b = 6
+    a = [23,2,6,4,7]
+    b = 13
     print(app.leetcode(a,b))
