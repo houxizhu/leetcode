@@ -1,33 +1,29 @@
 """
-
-Code
-Testcase
-Test Result
-Test Result
-345. Reverse Vowels of a String
+349. Intersection of Two Arrays
 Easy
 Topics
 Companies
-Given a string s, reverse only all the vowels in the string and return it.
-
-The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+Given two integer arrays nums1 and nums2, return an array of their
+intersection
+. Each element in the result must be unique and you may return the result in any order.
 
 
 
 Example 1:
 
-Input: s = "hello"
-Output: "holle"
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
 Example 2:
 
-Input: s = "leetcode"
-Output: "leotcede"
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [9,4]
+Explanation: [4,9] is also accepted.
 
 
 Constraints:
 
-1 <= s.length <= 3 * 105
-s consist of printable ASCII characters.
+1 <= nums1.length, nums2.length <= 1000
+0 <= nums1[i], nums2[i] <= 1000
 """
 
 import string
@@ -41,42 +37,18 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, s: str) -> str:
-        ll = len(s)
-        head = 0
-        tail = ll-1
-        result = ['-']*ll
-        while head <= tail:
-            # print(head,tail)
-            if head == tail:
-                result[head] = s[head]
-                break
-
-            if s[head] in ['a','e', 'i','o', 'u', 'A', 'E', 'I', 'O', 'U'] and s[tail] in ['a','e', 'i','o', 'u', 'A', 'E', 'I', 'O', 'U']:
-                result[head] = s[tail]
-                result[tail] = s[head]
-                head += 1
-                tail -= 1
-                # print(head,tail,result)
-                continue
-
-            if s[tail] in ['a','e', 'i','o', 'u', 'A', 'E', 'I', 'O', 'U']:
-                result[head] = s[head]
-                head += 1
-            elif s[head] in ['a','e', 'i','o', 'u', 'A', 'E', 'I', 'O', 'U']:
-                result[tail] = s[tail]
-                tail -= 1
-            else:
-                result[head] = s[head]
-                head += 1
-                result[tail] = s[tail]
-                tail -= 1
-            # print(head,tail,result)
-
-        return ('').join(result)
+    def leetcode(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        result = []
+        for each in nums1:
+            if each in nums2:
+                if each not in result:
+                    result.append(each)
+        return result
 
 if __name__ == "__main__":
     app = Solution()
     a = "hello"
     a = " "
-    print(app.leetcode(a))
+    a = [4, 9, 5]
+    b = [9, 4, 9, 8, 4]
+    print(app.leetcode(a,b))
