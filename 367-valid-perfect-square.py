@@ -1,39 +1,58 @@
 """
-
-Code
-Testcase
-Test Result
-Test Result
-350. Intersection of Two Arrays II
+2037. Minimum Number of Moves to Seat Everyone
 Easy
 Topics
 Companies
-Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+Hint
+There are n seats and n students in a room. You are given an array seats of length n, where seats[i] is the position of the ith seat. You are also given the array students of length n, where students[j] is the position of the jth student.
+
+You may perform the following move any number of times:
+
+Increase or decrease the position of the ith student by 1 (i.e., moving the ith student from position x to x + 1 or x - 1)
+Return the minimum number of moves required to move each student to a seat such that no two students are in the same seat.
+
+Note that there may be multiple seats or students in the same position at the beginning.
 
 
 
 Example 1:
 
-Input: nums1 = [1,2,2,1], nums2 = [2,2]
-Output: [2,2]
+Input: seats = [3,1,5], students = [2,7,4]
+Output: 4
+Explanation: The students are moved as follows:
+- The first student is moved from from position 2 to position 1 using 1 move.
+- The second student is moved from from position 7 to position 5 using 2 moves.
+- The third student is moved from from position 4 to position 3 using 1 move.
+In total, 1 + 2 + 1 = 4 moves were used.
 Example 2:
 
-Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-Output: [4,9]
-Explanation: [9,4] is also accepted.
+Input: seats = [4,1,5,9], students = [1,3,2,6]
+Output: 7
+Explanation: The students are moved as follows:
+- The first student is not moved.
+- The second student is moved from from position 3 to position 4 using 1 move.
+- The third student is moved from from position 2 to position 5 using 3 moves.
+- The fourth student is moved from from position 6 to position 9 using 3 moves.
+In total, 0 + 1 + 3 + 3 = 7 moves were used.
+Example 3:
+
+Input: seats = [2,2,6,6], students = [1,3,2,6]
+Output: 4
+Explanation: Note that there are two seats at position 2 and two seats at position 6.
+The students are moved as follows:
+- The first student is moved from from position 1 to position 2 using 1 move.
+- The second student is moved from from position 3 to position 6 using 3 moves.
+- The third student is not moved.
+- The fourth student is not moved.
+In total, 1 + 3 + 0 + 0 = 4 moves were used.
 
 
 Constraints:
 
-1 <= nums1.length, nums2.length <= 1000
-0 <= nums1[i], nums2[i] <= 1000
+n == seats.length == students.length
+1 <= n <= 100
+1 <= seats[i], students[j] <= 100
 
-
-Follow up:
-
-What if the given array is already sorted? How would you optimize your algorithm?
-What if nums1's size is small compared to nums2's size? Which algorithm is better?
-What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 """
 
 import string
@@ -47,27 +66,14 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort()
-        nums2.sort()
-        ll1 = len(nums1)
-        ll2 = len(nums2)
-        i1 = 0
-        i2 = 0
-        result = []
-        while i1 < ll1 and i2 < ll2:
-            if nums1[i1] == nums2[i2]:
-                result.append(nums1[i1])
-                i1 += 1
-                i2 += 1
-                if i1 == ll1:
-                    break
-                if i2 == ll2:
-                    break
-            elif nums1[i1] < nums2[i2]:
-                i1 += 1
-            elif nums1[i1] > nums2[i2]:
-                i2 += 1
+    def leetcode(self, eats: List[int], students: List[int]) -> int:
+        seats.sort()
+        students.sort()
+        n = len(seats)
+        result = 0
+        for ii in range(n):
+            result += abs(seats[ii]-students[ii])
+
         return result
 
 if __name__ == "__main__":
