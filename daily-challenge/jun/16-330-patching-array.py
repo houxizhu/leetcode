@@ -50,34 +50,21 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
-        projects = list(zip(capital, profits))
-
-        # Sort projects by their required capital
-        projects.sort()
-
-        # Max-heap for profits of feasible projects
-        max_heap = []
-
-        # Index to track which projects can be started
+    def leetcode(self, nums: List[int], n: int) -> int:
+        patches = 0
+        miss = 1
         i = 0
-        n = len(projects)
+        length = len(nums)
 
-        # Iterate up to k projects
-        for _ in range(k):
-            # Push all projects that can be started with the current capital into the max-heap
-            while i < n and projects[i][0] <= w:
-                heapq.heappush(max_heap, -projects[i][1])
+        while miss <= n:
+            if i < length and nums[i] <= miss:
+                miss += nums[i]
                 i += 1
+            else:
+                miss += miss
+                patches += 1
 
-            # If the max-heap is empty, we can't start any more projects
-            if not max_heap:
-                break
-
-            # Select the project with the highest profit
-            w += -heapq.heappop(max_heap)
-
-        return w
+        return patches
 
 if __name__ == "__main__":
     app = Solution()

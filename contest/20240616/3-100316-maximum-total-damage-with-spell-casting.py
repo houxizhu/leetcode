@@ -110,7 +110,7 @@ class Solution:
 
         # Initialize DP dictionary
         dp = {}
-    
+
         for damage in unique_damages:
             # Maximum damage if we exclude this spell
             exclude_damage = dp.get(damage - 1, 0)
