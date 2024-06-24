@@ -40,10 +40,15 @@ class ListNode:
 class Solution:
     def leetcode(self, s: str) -> int:
         l = s.split(' ')
-        return len(l)
+        # print(l)
+        result = 0
+        for each in l:
+            if each != "" :
+                result += 1
+        return result
 
 if __name__ == "__main__":
     app = Solution()
-    a = "11"
+    a = "    "
     b = "123"
-    print(app.leetcode(a,b))
+    print(app.leetcode(a))
