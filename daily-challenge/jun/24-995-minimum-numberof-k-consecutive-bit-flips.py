@@ -52,34 +52,24 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
-        projects = list(zip(capital, profits))
+    def leetcode(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        flip_count = 0
+        is_flipped = [0] * n
+        result = 0
 
-        # Sort projects by their required capital
-        projects.sort()
+        for i in range(n):
+            if i >= k:
+                flip_count ^= is_flipped[i - k]
 
-        # Max-heap for profits of feasible projects
-        max_heap = []
+            if flip_count % 2 == nums[i]:
+                if i + k > n:
+                    return -1
+                is_flipped[i] = 1
+                flip_count ^= 1
+                result += 1
 
-        # Index to track which projects can be started
-        i = 0
-        n = len(projects)
-
-        # Iterate up to k projects
-        for _ in range(k):
-            # Push all projects that can be started with the current capital into the max-heap
-            while i < n and projects[i][0] <= w:
-                heapq.heappush(max_heap, -projects[i][1])
-                i += 1
-
-            # If the max-heap is empty, we can't start any more projects
-            if not max_heap:
-                break
-
-            # Select the project with the highest profit
-            w += -heapq.heappop(max_heap)
-
-        return w
+        return result
 
 if __name__ == "__main__":
     app = Solution()
