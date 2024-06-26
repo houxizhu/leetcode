@@ -42,21 +42,41 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, nums: List[int], n: int) -> int:
-        patches = 0
-        miss = 1
-        i = 0
-        length = len(nums)
+    def leetcode(self, root: TreeNode) -> TreeNode:
+        if root == None:
+            return None
+        ltree = []
+        q = [root]
+        while q:
+            p = q.pop()
+            if p.right == None and p.left == None:
+                ltree.append(p)
+                continue
 
-        while miss <= n:
-            if i < length and nums[i] <= miss:
-                miss += nums[i]
-                i += 1
+            if p.right:
+                q.append(p.right)
+            p.right = None
+
+            if p.left:
+                pleft = p.left
+                p.left = None
+                q.append(p)
+                q.append(pleft)
             else:
-                miss += miss
-                patches += 1
+                ltree.append(p)
 
-        return patches
+        ll = len(ltree)
+
+        def build_balanced_bst(start, end):
+            if start > end:
+                return None
+            mid = (start + end) // 2
+            root = ltree[mid]
+            root.left = build_balanced_bst(start, mid - 1)
+            root.right = build_balanced_bst(mid + 1, end)
+            return root
+
+        return build_balanced_bst(0, len(ltree) - 1)
 
 if __name__ == "__main__":
     app = Solution()
