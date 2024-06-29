@@ -47,14 +47,13 @@ class ListNode:
 
 class Solution:
     def leetcode(self, n: int, edges: List[List[int]]) -> List[List[int]]:
-        def dfs(node, visited, graph, ancestors):
+        def dfs(node):
             for neighbor in graph[node]:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    dfs(neighbor, visited, graph, ancestors)
-                    visited.remove(neighbor)
-                ancestors[neighbor].update(ancestors[node])
-                ancestors[neighbor].add(node)
+                if visited[neighbor] == 0:
+                    ancestors[neighbor].update(ancestors[node])
+                    ancestors[neighbor].add(node)
+                    visited[neighbor] = 1
+                    dfs(neighbor)
 
         graph = defaultdict(list)
         for frm, to in edges:
@@ -63,8 +62,9 @@ class Solution:
         ancestors = [set() for _ in range(n)]
 
         for node in range(n):
-            visited = set([node])
-            dfs(node, visited, graph, ancestors)
+            visited = [0 for _ in range(n)]
+            visited[node] = 1
+            dfs(node)
 
         return [sorted(list(ancestor_set)) for ancestor_set in ancestors]
 
@@ -81,5 +81,7 @@ if __name__ == "__main__":
     app = Solution()
     a = 8
     b = [[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]]
+    a = 9
+    b = [[3,6],[2,4],[8,6],[7,4],[1,4],[2,1],[7,2],[0,4],[5,0],[4,6],[3,2],[5,6],[1,6]]
 
     print(app.leetcode(a,b))
