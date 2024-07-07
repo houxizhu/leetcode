@@ -46,6 +46,27 @@ class ListNode:
 
 class Solution:
     def leetcode(self, words: List[str]) -> List[str]:
+        def charline(char: string) -> int:
+            if char.lower() in "qwertyuiop":
+                return 1
+            elif char.lower() in "asdfghjkl":
+                return 2
+            elif char.lower() in "zxcvbnm":
+                return 3
+            return 0
+
+        result = []
+        for word in words:
+            first = charline(word[0])
+            insameline = 1
+            for char in word:
+                if charline(char) != first:
+                    insameline = 0
+                    break
+            if insameline:
+                result.append(word)
+
+        return result
 
 if __name__ == "__main__":
     app = Solution()
