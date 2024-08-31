@@ -38,14 +38,25 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, head: Optional[ListNode]) -> List[int]:
-        ll = len(nums)
-        result = 0
+    def leetcode(self, points: List[List[int]]) -> float:
+        ### chatgpt
+        def triangle_area(p1, p2, p3):
+            return 0.5 * abs(p1[0] * (p2[1] - p3[1]) + p2[0] * (p3[1] - p1[1]) + p3[0] * (p1[1] - p2[1]))
 
-        for ii in range(ll):
-            pass
+        max_area = 0
+        for p1, p2, p3 in combinations(points, 3):
+            max_area = max(max_area, triangle_area(p1, p2, p3))
 
-        return result
+        return max_area
+
+        ### solution#2, without using combinations
+        n = len(points)
+        for i in range(n):
+            for j in range(i + 1, n):
+                for k in range(j + 1, n):
+                    max_area = max(max_area, triangle_area(points[i], points[j], points[k]))
+
+        return max_area
 
 
 if __name__ == "__main__":
