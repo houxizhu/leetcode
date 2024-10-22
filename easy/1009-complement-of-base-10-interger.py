@@ -54,7 +54,7 @@ class Solution:
             if n&(1<<(31-ii)):
                 return (1<<(31-ii+1))-1-n
 
-        return -1
+        return 1
 
 
 if __name__ == "__main__":
