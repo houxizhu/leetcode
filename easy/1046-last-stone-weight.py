@@ -51,23 +51,29 @@ class ListNode:
 class Solution:
     def leetcode(self, stones: List[int]) -> int:
         ll = len(stones)
-        stones.sort(reverse=True)
+        stones.sort(reverse=True) ### from bigest to smallest
         index = 1
         while index < ll:
-            stones[index] -= stones[index-1]
-            stones[index-1] = 0
-            index += 1
-            if index == ll-1:
-                break
-            elif stones[index] == 0:
-                index += 1
+            #print(index,stones)
+            smash = stones[index-1] - stones[index]
+            stones[index] = smash
+            if smash == 0:        ### destroyed
+                index += 2
+                continue
+            
+            #index += 1
+            if index >= ll-1:
+                return smash      ### finish
+            elif stones[index+1] == 0:
+                return smash      ### no more smash needed, finish
             else:
                 ii = index
                 while stones[ii] < stones[ii+1]:
                     stones[ii], stones[ii+1] = stones[ii+1], stones[ii]
                     ii += 1
-                    if ii == ll-1:
+                    if ii == ll-1: ### the end
                         break
+                index += 1
 
         return stones[-1]
 
