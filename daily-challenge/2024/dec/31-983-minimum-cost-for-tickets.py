@@ -63,14 +63,37 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, head: Optional[ListNode]) -> List[int]:
-        ll = len(nums)
-        result = 0
+    def leetcode(self, days: List[int], costs: List[int]) -> int:
+        ll = len(days)
+        index7 = -1
+        index30 = -1
+        dp = [0]*ll
+        dp[0] = min(costs)
+        mincost = 0
+        for ii in range(1, ll):
+            cost1 = dp[ii-1]+costs[0]
+            while index7 < ll:
+                if days[index7+1] + 6 >= days[ii]:
+                    break
+                index7 += 1
+            
+            cost7 = costs[1]
+            if index7 >= 0:
+                cost7 += dp[index7]
 
-        for ii in range(ll):
-            pass
+            while index30 < ll:
+                if days[index30+1] + 29 >= days[ii]:
+                    break
+                index30 += 1
 
-        return result
+            cost30 = costs[2]
+            if index30 >= 0:
+                cost30 += dp[index30]
+
+            dp[ii] = min(cost1, cost7, cost30)
+        #print(dp)
+
+        return dp[-1]
 
 
 if __name__ == "__main__":
