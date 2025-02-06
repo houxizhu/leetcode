@@ -53,14 +53,26 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def leetcode(self, head: Optional[ListNode]) -> List[int]:
-        ll = len(nums)
-        result = 0
-
-        for ii in range(ll):
-            pass
-
-        return result
+    def leetcode(self, s: str, numRows: int) -> str:
+        ll = len(s)
+        if numRows <= 1:
+            return s
+        if numRows >= ll:
+            return s
+        rows = [""]*numRows
+        index = 0
+        step = 1
+        for each in s:
+            #print(rows)
+            rows[index] += each
+            if index == 0:
+                step = 1
+            elif index == numRows-1:
+                step = -1
+            
+            index += step
+        
+        return "".join(rows)
 
 
 if __name__ == "__main__":
