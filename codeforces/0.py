@@ -19,10 +19,10 @@ def codeforces(self, head: Optional[ListNode]) -> List[int]:
 
     return result
 
-
-if __name__ == "__main__":
-    t = int(sys.stdin.readline().strip())
+if __name__ ==  "__main__":
+    t = int(input())
     for _ in range(t):
-        stra = sys.stdin.readline().strip()
-        strb = sys.stdin.readline().strip()
-        codeforces(stra,strb)
+        n,m = list(map(int, input().split()))
+        a = list(map(int, input().split()))
+        b = list(map(int, input().split()))
+        print(codeforces(n,1,a,b))
