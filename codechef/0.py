@@ -22,8 +22,14 @@ def codechef(self, head: Optional[ListNode]) -> List[int]:
 
 
 if __name__ == "__main__":
-    t = int(sys.stdin.readline().strip())
+    t = int(input())
     for _ in range(t):
-        stra = sys.stdin.readline().strip()
-        strb = sys.stdin.readline().strip()
-        codechef(stra,strb)
+        n = int(input())
+        a = list(map(int, input().split()))
+        print(codeforces(n, a))
+
+    # t = int(sys.stdin.readline().strip())
+    # for _ in range(t):
+    #     stra = sys.stdin.readline().strip()
+    #     strb = sys.stdin.readline().strip()
+    #     codechef(stra,strb)
