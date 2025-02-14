@@ -1,10 +1,6 @@
 '''
 27. Remove Element
-Solved
-Easy
-Topics
-Companies
-Hint
+
 Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 
 Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
@@ -63,22 +59,45 @@ class ListNode:
 
 class Solution:
     def leetcode(self, nums: List[int], val: int) -> int:
+        result = 0
         ll = len(nums)
-        ii = 0
-        while ii < len(nums):
-            if nums[ii] == val:
-                nums.pop(ii)
+        for ii in range(ll):
+            num = nums.pop(0)
+            if num != val:
+                result += 1
+                nums.append(num)
+        return result
+
+        ### turns out that it is not only the result is checked
+        ### but also the nums itself
+            
+
+        ### I do not understand why
+        ll = len(nums)
+        indexv = 0
+        index = ll-1
+        while indexv < ll and index >= 0:
+            if nums[index] != nums[indexv]:
+                nums[index], nums[indexv] = nums[indexv], nums[index]
+                index -= 1
+                indexv += 1
+            while indexv < ll:
+                if nums[indexv] == val:
+                    break
+                indexv += 1
+            while index >= 0:
+                if nums[index] != val:
+                    break
+                index -= 1
+        result = ll
+        print(nums)
+        for ii in range(ll):
+            if nums[ii] != val:
+                result -= 1
             else:
-                ii += 1
+                break
 
-        return ll-len(nums)
-
-if __name__ == "__main__":
-    app = Solution()
-    test1 = [0,1,2,2,3,0,4,2]
-    val = 2
-    print(app.leetcode(test1, val))
-    print(test1)
+        return result
 
 # the test case #2 is incorrect, [0,1,2,2,3,0,4,2], val = 2
 # with return 3 and output of [0, 1, 3, 0, 4] is correct but leetcode expects answer is [0, 1, 4, 0, 3]
