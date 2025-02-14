@@ -41,19 +41,23 @@ class ListNode:
 
 class Solution:
     def leetcode(self, flowerbed: List[int], n: int) -> bool:
-        flowerbed: List[int], n: int) -> bool:
+        ### for 0000 with 1...1
+        if sum(flowerbed) == 0:
+            return (len(flowerbed)+1)//2 >= n
+
         result = 0
-        count0 = 1
-        for each in flowerbed:
-            if
-        each == 0:
-        count0 += 1
-        else:
-        if count0 > 1:
-            result += (count0 - 1) // 2
         count0 = 0
-        count0 += 1
-        result += (count0 - 1) // 2
+        extra = 1 ### for first 1, 00001, which has no leftside 1
+        for each in flowerbed:
+            if each == 0:
+                count0 += 1
+            else:
+                result += (count0-1+extra)//2
+                extra = 0
+                count0 = 0
+                #print(each, count0, result)
+        result += count0//2
+        #print(result)
 
         return result >= n
 
